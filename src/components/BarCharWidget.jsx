@@ -15,7 +15,7 @@ export default function BarChartWidget() {
     <div className="flex-1 bg-white dark:bg-gray-700 text-gray-800 dark:text-white rounded-2xl p-4 shadow-sm">
       <h3 className="font-semibold text-lg mb-2">Total students</h3>
       <p className="font-medium mb-4 text-gray-600 dark:text-gray-300">Bar Chart</p>
-      <ResponsiveContainer width="100%" height={200}>
+      <ResponsiveContainer width="100%" height={230}>
         <BarChart data={data}>
           <XAxis dataKey="name"
             stroke="#8884d8"
