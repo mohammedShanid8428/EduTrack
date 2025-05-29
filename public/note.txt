@@ -1,0 +1,35 @@
+{/* Main content area */}
+      <div className="flex flex-col flex-1 ml-64">
+        {/* Header on top */}
+        <header className="sticky top-0 z-20 bg-white border-b border-gray-200">
+          <Header />
+        </header>
+      </div>  
+
+        {/* Scrollable content */}
+        <main className="flex-1 overflow-y-auto p-6 space-y-6 bg-gray-50">
+          {/* Buttons section */}
+          <div className="flex space-x-4">
+            <button className="px-6 py-3 rounded-xl border border-black bg-white text-black hover:bg-gray-100">
+              students
+            </button>
+            <button className="px-6 py-3 rounded-xl border border-black bg-white text-black hover:bg-gray-100">
+              courses
+            </button>
+          </div>
+
+          {/* Bar Chart section */}
+          <div className="bg-white border rounded-xl shadow p-4 max-w-md">
+            <h3 className="font-semibold text-lg mb-2">• Total students</h3>
+            <BarChartWidget />
+          </div>
+
+          {/* Star Students section */}
+          <div className="bg-white rounded-xl shadow p-6">
+            <h3 className="font-semibold text-lg mb-4">Star students</h3>
+            {/* Content here */}
+          </div>
+        </main>
+      </div>
+    </div>
+    grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6
