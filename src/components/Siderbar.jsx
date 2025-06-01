@@ -11,7 +11,7 @@ const navItems = [
 export default function Sidebar() {
   return (
     <>
-    <div className="flex flex-col h-screen   p-4 justify-between bg-white w-64  dark:bg-gray-700 dark:text-white">
+    <div className="flex flex-col h-screen   p-4 justify-between bg-background w-64  dark:bg-background dark:text-foreground">
       <h1 className="text-2xl font-extrabold mb-10">EduTrack</h1>
 
       <nav className="flex flex-col gap-2">
@@ -21,7 +21,7 @@ export default function Sidebar() {
             to={path}
             className={({ isActive }) =>
               `flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors
-               ${isActive ? 'font-semibold bg-gray-100 dark:bg-gray-600' : 'text-gray-600 dark:text-gray-300'}`
+               ${isActive ? 'font-semibold bg-background dark:bg-background' : 'text-foreground dark:text-foreground'}`
             }
           >
             <Icon size={18} />
@@ -31,11 +31,11 @@ export default function Sidebar() {
       </nav>
 
       <div className="flex flex-col gap-3 ">
-        <button className="flex items-center gap-3 p-2 rounded-lg text-gray-600 dark:text-white hover:bg-gray-100 w-full">
+        <button className="flex items-center gap-3 p-2 rounded-lg text-foreground dark:text-foreground hover:bg-gray-100 w-full">
           <Settings size={18} />
           Setting
         </button>
-        <button className="flex items-center gap-3 p-2 rounded-lg text-gray-600 dark:text-white hover:bg-gray-100 w-full">
+        <button className="flex items-center gap-3 p-2 rounded-lg text-foreground dark:text-foreground hover:bg-gray-100 w-full">
           <LogOut size={18} />
           Logout
         </button>

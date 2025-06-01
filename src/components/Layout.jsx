@@ -12,7 +12,7 @@ export default function Layout() {
   }, [dark]);
 
   return (
-    <div className="flex bg-gray-100 dark:bg-gray-900 min-h-screen">
+    <div className="flex bg-background dark:bg-background min-h-screen">
       <Sidebar />
       <div className="flex-1 p-4">
         <Header dark={dark} setDark={setDark} />

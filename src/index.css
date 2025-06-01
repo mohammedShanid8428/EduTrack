@@ -2,11 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 body {
   font-family: "Outfit", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+}
+
+@layer base {
+  
+:root  {
+  --background: 167, 25%, 95%;
+  --foreground: 162, 22%, 9%;
+  --card: 174 50% 90%;
+  --card-foreground: 174 5% 10%;
+  --popover: 174 100% 95%;
+  --popover-foreground: 174 100% 0%;
+  --primary: 161, 45%, 25%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 162, 55%, 87%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 136 30% 85%;
+  --muted-foreground: 174 5% 35%;
+  --accent: 162, 65%, 41%;
+  --accent-foreground: 174 5% 10%;
+  --destructive: 0 100% 30%;
+  --destructive-foreground: 174 5% 90%;
+  --border: 174 30% 50%;
+  --input: 174 30% 18%;
+  --ring: 174 88% 58%;
+  --radius: 0.5rem;
+}
+.dark  {
+  --background: 167, 25%, 11%;
+  --foreground: 162, 22%, 91%;
+  --card: 174 50% 0%;
+  --card-foreground: 174 5% 90%;
+  --popover: 174 50% 5%;
+  --popover-foreground: 174 5% 90%;
+  --primary: 161, 45%, 75%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 162, 55%, 32%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 136 30% 15%;
+  --muted-foreground: 174 5% 60%;
+  --accent: 162, 65%, 59%;
+  --accent-foreground: 174 5% 90%;
+  --destructive: 0 100% 30%;
+  --destructive-foreground: 174 5% 90%;
+  --border: 174 30% 18%;
+  --input: 174 30% 18%;
+  --ring: 174 88% 58%;
+  --radius: 0.5rem;
+}
+
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
