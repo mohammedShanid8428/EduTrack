@@ -58,19 +58,18 @@ export default function TimeTableWidget() {
 
 
   return (
-    <div className="bg-white dark:bg-gray-700 rounded-2xl p-3 shadow-sm overflow-x-auto">
-      <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
+    <div className="bg-background dark:bg-background rounded-2xl p-3 shadow-sm overflow-x-auto border border-accent ">
+      <h3 className="text-xl font-semibold mb-4 text-foreground dark:text-foreground">
         Weekly Timetable
       </h3>
       <table className="table-fixed w-full border-collapse">
         <thead>
           <tr>
-            <th className="p-2 text-left text-gray-500 w-24">Time</th>
+            <th className="p-1 text-left text-foreground dark:text-foreground w-24 ">Time</th>
             {days.map((day, index) => (
               <th
                 key={day}
-                className={`p-2 text-left text-white ${index % 2 === 0 ? "bg-sky-600" : "bg-sky-500"
-                  }`}
+                className={`p-1 text-left text-white dark:text-black ${index % 2 === 0 ? "bg-primary" : "bg-accent"}`}
               >
                 {day}
               </th>
@@ -80,7 +79,7 @@ export default function TimeTableWidget() {
         <tbody>
           {times.map((time) => (
             <tr key={time}>
-              <td className="p-2 font-medium text-gray-600 dark:text-gray-300 capitalize">
+              <td className="p-1 font-medium text-foreground dark:text-foreground capitalize">
                 {time}
               </td>
               {days.map((day) => {

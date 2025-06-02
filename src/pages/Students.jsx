@@ -1,155 +1,167 @@
-import React, { useState } from 'react';
-import { Pencil, Trash2, Save, X } from 'lucide-react';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+"use client"
 
-const initialData = [
-  { id: 1, name: 'John Doe', email: 'john_dmt@inc', course: 'Web Design', status: 'Active' },
-  { id: 2, name: 'Louisa Smith', email: 'louis_smith@in', course: 'Data Science', status: 'Active' },
-  { id: 3, name: 'James Wilson', email: 'james_wilson@m', course: 'Marketing', status: 'Active' },
-  { id: 4, name: 'Emily Johnson', email: 'emily_johnson@n', course: 'Machine Learning', status: 'Active' },
-  { id: 5, name: 'Michael Brown', email: 'michael.brown@v', course: 'Data Science', status: 'Inactive' },
-];
+import React, { useState, useEffect } from "react"
+import { getAllApis } from "@/services/AllApis"
+import TableData from "@/components/TableData"
+import { PieChart, Pie, Cell, LabelList } from "recharts"
+import { TrendingUp } from "lucide-react"
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
-function Students() {
-  const [students, setStudents] = useState(initialData);
-  const [editingId, setEditingId] = useState(null);
-  const [formData, setFormData] = useState({});
+import {
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart"
 
-  const handleEdit = (student) => {
-    setEditingId(student.id);
-    setFormData({ ...student });
-  };
+// Dummy data
+const courseData = [
+  { course: "Math", students: 120, fill: "var(--color-math)" },
+  { course: "Science", students: 95, fill: "var(--color-science)" },
+  { course: "English", students: 80, fill: "var(--color-english)" },
+  { course: "History", students: 60, fill: "var(--color-history)" },
+  { course: "Computer", students: 145, fill: "var(--color-computer)" },
+]
 
-  const handleCancel = () => {
-    setEditingId(null);
-    setFormData({});
-  };
+const gradeData = [
+  { grade: "A", count: 50 },
+  { grade: "B", count: 80 },
+  { grade: "C", count: 40 },
+  { grade: "D", count: 20 },
+  { grade: "F", count: 10 },
+]
 
-  const handleSave = () => {
-    setStudents(students.map(s => s.id === editingId ? formData : s));
-    setEditingId(null);
-  };
-
-  const handleDelete = (id) => {
-    setStudents(students.filter(s => s.id !== id));
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const studentsPerCourse = Object.entries(
-    students.reduce((acc, curr) => {
-      acc[curr.course] = (acc[curr.course] || 0) + 1;
-      return acc;
-    }, {})
-  ).map(([name, value]) => ({ name, value }));
-
-  const gradesData = [
-    { name: 'A', value: 8 },
-    { name: 'B', value: 5 },
-    { name: 'C', value: 2 },
-  ];
-
-  return (
-    <div className="p-4 space-y-6">
-      <div className="border rounded-2xl p-6 shadow-sm bg-white dark:bg-gray-700 ">
-        <h2 className="text-xl font-bold mb-4">Student Data</h2>
-        <table className="w-full border border-gray-700 text-md">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border border-black border-2 p-2">Name</th>
-              <th className="border border-black border-2 p-2">Email</th>
-              <th className="border border-black border-2 p-2">Course</th>
-              <th className="border border-black border-2 p-2">Status</th>
-              <th className="border border-black border-2 p-2">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {students.map((student) => (
-              <tr key={student.id}>
-                {editingId === student.id ? (
-                  <>
-                    <td className="border border-black border-2 p-2">
-                      <input name="name" value={formData.name} onChange={handleChange} className="w-full" />
-                    </td>
-                    <td className="border p-2">
-                      <input name="email" value={formData.email} onChange={handleChange} className="w-full" />
-                    </td>
-                    <td className="border p-2">
-                      <input name="course" value={formData.course} onChange={handleChange} className="w-full" />
-                    </td>
-                    <td className="border p-2">
-                      <select name="status" value={formData.status} onChange={handleChange} className="w-full">
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                      </select>
-                    </td>
-                  </>
-                ) : (
-                  <>
-                    <td className="border border-black border-1 p-2">{student.name}</td>
-                    <td className="border border-black border-1 p-2">{student.email}</td>
-                    <td className="border border-black border-1 p-2">{student.course}</td>
-                    <td className="border border-black border-1 p-2">
-                      <span className={`px-2 py-1 rounded-full text-xs font-semibold ${student.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                        {student.status}
-                      </span>
-                    </td>
-                  </>
-                )}
-                <td className="border p-2 text-center border-black border-1">
-                  {editingId === student.id ? (
-                    <div className="flex gap-2 justify-center">
-                      <button onClick={handleSave}><Save size={16} className="text-green-600" /></button>
-                      <button onClick={handleCancel}><X size={16} className="text-red-600" /></button>
-                    </div>
-                  ) : (
-                    <div className="flex gap-2 justify-center">
-                      <button onClick={() => handleEdit(student)}><Pencil size={16} className="text-blue-600" /></button>
-                      <button onClick={() => handleDelete(student.id)}><Trash2 size={16} className="text-red-600" /></button>
-                    </div>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="border rounded-2xl p-4 bg-white dark:bg-gray-700">
-          <h3 className="text-lg font-semibold mb-2">Students per Course</h3>
-          <ResponsiveContainer width="100%" height={200}>
-            <PieChart>
-              <Pie data={studentsPerCourse} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={60} label>
-                {studentsPerCourse.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-
-        <div className="border rounded-2xl p-4 bg-white dark:bg-gray-700">
-          <h3 className="text-lg font-semibold mb-2">Grades</h3>
-          <ResponsiveContainer width="100%" height={200}>
-            <PieChart>
-              <Pie data={gradesData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={60} label>
-                {gradesData.map((entry, index) => (
-                  <Cell key={`cell-grade-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-    </div>
-  );
+const courseChartConfig = {
+  students: { label: "Students" },
+  Math: { label: "Math", color: "var(--chart-1)" },
+  Science: { label: "Science", color: "var(--chart-2)" },
+  English: { label: "English", color: "var(--chart-3)" },
+  History: { label: "History", color: "var(--chart-4)" },
+  Computer: { label: "Computer", color: "var(--chart-5)" },
 }
 
-export default Students;
+const gradeChartConfig = {
+  count: { label: "Students" },
+  A: { label: "Grade A", color: "var(--chart-1)" },
+  B: { label: "Grade B", color: "var(--chart-2)" },
+  C: { label: "Grade C", color: "var(--chart-3)" },
+  D: { label: "Grade D", color: "var(--chart-4)" },
+  F: { label: "Grade F", color: "var(--chart-5)" },
+}
+
+const StudentListPage = () => {
+  const [userData, setUserData] = useState([])
+  const headerData = ["Student ID", "Name", "Email", "Course", "Status"]
+
+  useEffect(() => {
+    fetchUserData()
+  }, [])
+
+  const fetchUserData = async () => {
+    try {
+      const response = await getAllApis()
+      setUserData(response.data)
+    } catch (error) {
+      console.error("Error Fetching User Data:", error.message)
+    }
+  }
+
+  return (
+    <div className="h-screen flex flex-col p-4 overflow-hidden">
+      {/* Top Section - Student Table */}
+      <div className="flex-1 border rounded-xl overflow-hidden mb-4">
+        <h1 className="text-xl font-semibold px-4 pt-4 pb-2">students data</h1>
+        <div className="h-full overflow-auto px-4 pb-4">
+          <TableData HeadData={headerData} rowData={userData} />
+        </div>
+      </div>
+
+      {/* Charts Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Students per Course */}
+        <Card>
+          <CardHeader className="items-center pb-0">
+            <CardTitle>Students Per Course</CardTitle>
+            <CardDescription>January - June 2024</CardDescription>
+          </CardHeader>
+          <CardContent className="pb-0">
+            <ChartContainer config={courseChartConfig} className="mx-auto aspect-square max-h-[300px]">
+              <PieChart>
+                <Pie
+                  data={courseData}
+                  dataKey="students"
+                  nameKey="course"
+                  outerRadius={100}
+                  label
+                >
+                  {courseData.map((entry, index) => (
+                    <Cell key={`course-${index}`} fill={entry.fill} />
+                  ))}
+                </Pie>
+                <ChartLegend
+                  content={<ChartLegendContent nameKey="course" />}
+                  className="-translate-y-2 flex-wrap gap-2 *:basis-1/4 *:justify-center"
+                />
+              </PieChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
+
+        {/* Grade Distribution */}
+        <Card>
+          <CardHeader className="items-center pb-0">
+            <CardTitle>Grade Distribution</CardTitle>
+            <CardDescription>Current Semester</CardDescription>
+          </CardHeader>
+          <CardContent className="pb-0">
+            <ChartContainer config={gradeChartConfig} className="mx-auto aspect-square max-h-[250px]">
+              <PieChart>
+                <ChartTooltip content={<ChartTooltipContent nameKey="count" hideLabel />} />
+                <Pie
+                  data={gradeData}
+                  dataKey="count"
+                  nameKey="grade"
+                  outerRadius={90}
+                  label
+                >
+                  <LabelList
+                    dataKey="grade"
+                    className="fill-background"
+                    stroke="none"
+                    fontSize={12}
+                    formatter={(value) => gradeChartConfig[value]?.label ?? value}
+                  />
+                  {gradeData.map((entry, index) => (
+                    <Cell
+                      key={`grade-${index}`}
+                      fill={gradeChartConfig[entry.grade]?.color || "#ccc"}
+                    />
+                  ))}
+                </Pie>
+              </PieChart>
+            </ChartContainer>
+          </CardContent>
+          <CardFooter className="flex-col gap-2 text-sm">
+            <div className="flex items-center gap-2 font-medium">
+              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+            </div>
+            <div className="text-muted-foreground">
+              Showing student grade distribution
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
+    </div>
+  )
+}
+
+export default StudentListPage
