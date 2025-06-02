@@ -1,11 +1,10 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import { getAllApis } from "@/services/AllApis"
+import { getAllStudents, updateStudent, deleteStudent } from "@/services/AllApis"
 import TableData from "@/components/TableData"
 import { PieChart, Pie, Cell, LabelList } from "recharts"
 import { TrendingUp } from "lucide-react"
-
 import {
   Card,
   CardContent,
@@ -14,7 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-
 import {
   ChartContainer,
   ChartLegend,
@@ -23,15 +21,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-// Dummy data
-const courseData = [
-  { course: "Math", students: 120, fill: "var(--color-math)" },
-  { course: "Science", students: 95, fill: "var(--color-science)" },
-  { course: "English", students: 80, fill: "var(--color-english)" },
-  { course: "History", students: 60, fill: "var(--color-history)" },
-  { course: "Computer", students: 145, fill: "var(--color-computer)" },
-]
-
+// Static grade data
 const gradeData = [
   { grade: "A", count: 50 },
   { grade: "B", count: 80 },
@@ -40,71 +30,155 @@ const gradeData = [
   { grade: "F", count: 10 },
 ]
 
-const courseChartConfig = {
-  students: { label: "Students" },
-  Math: { label: "Math", color: "var(--chart-1)" },
-  Science: { label: "Science", color: "var(--chart-2)" },
-  English: { label: "English", color: "var(--chart-3)" },
-  History: { label: "History", color: "var(--chart-4)" },
-  Computer: { label: "Computer", color: "var(--chart-5)" },
-}
-
-const gradeChartConfig = {
-  count: { label: "Students" },
-  A: { label: "Grade A", color: "var(--chart-1)" },
-  B: { label: "Grade B", color: "var(--chart-2)" },
-  C: { label: "Grade C", color: "var(--chart-3)" },
-  D: { label: "Grade D", color: "var(--chart-4)" },
-  F: { label: "Grade F", color: "var(--chart-5)" },
+// Helper function to get CSS variable values
+const getColorVar = (name) => {
+  const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+  return `hsl(${value})`
 }
 
 const StudentListPage = () => {
   const [userData, setUserData] = useState([])
-  const headerData = ["Student ID", "Name", "Email", "Course", "Status"]
+  const [loading, setLoading] = useState(true)
+  const [colors, setColors] = useState({
+    primary: "#8884d8",
+    secondary: "#82ca9d",
+    accent: "#ffc658",
+    background: "#1d2c28",
+    muted: "#1a2d24",
+  })
 
-  useEffect(() => {
-    fetchUserData()
-  }, [])
+  const headerData = ["ID", "Name", "Email", "Course", "Status", "Actions"]
 
+  // Update chart colors when theme changes
+  const updateChartColors = () => {
+    setColors({
+      primary: getColorVar("--primary"),
+      secondary: getColorVar("--secondary"),
+      accent: getColorVar("--accent"),
+      background: getColorVar("--background"),
+      muted: getColorVar("--muted"),
+    })
+  }
+
+  // Fetch user data
   const fetchUserData = async () => {
     try {
-      const response = await getAllApis()
+      setLoading(true)
+      const response = await getAllStudents()
       setUserData(response.data)
     } catch (error) {
       console.error("Error Fetching User Data:", error.message)
+    } finally {
+      setLoading(false)
     }
+  }
+
+  // Handle student update
+  const handleUpdateStudent = async (studentId, updatedData) => {
+    try {
+      await updateStudent(studentId, updatedData)
+      fetchUserData() // Refresh data
+    } catch (error) {
+      console.error("Error updating student:", error)
+    }
+  }
+
+  // Handle student deletion
+  const handleDeleteStudent = async (studentId) => {
+    try {
+      await deleteStudent(studentId)
+      fetchUserData() // Refresh data
+    } catch (error) {
+      console.error("Error deleting student:", error)
+    }
+  }
+
+  useEffect(() => {
+    fetchUserData()
+    updateChartColors()
+
+    // Observe theme changes
+    const observer = new MutationObserver(updateChartColors)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  // Chart data and configurations
+  const courseData = [
+    { course: "Math", students: 120 },
+    { course: "Science", students: 95 },
+    { course: "English", students: 80 },
+    { course: "History", students: 60 },
+    { course: "Computer", students: 145 },
+  ]
+
+  const courseChartConfig = {
+    students: { label: "Students" },
+    Math: { label: "Math", color: colors.primary },
+    Science: { label: "Science", color: colors.secondary },
+    English: { label: "English", color: colors.accent },
+    History: { label: "History", color: colors.background },
+    Computer: { label: "Computer", color: colors.muted },
+  }
+
+  const gradeChartConfig = {
+    count: { label: "Students" },
+    A: { label: "Grade A", color: colors.primary },
+    B: { label: "Grade B", color: colors.secondary },
+    C: { label: "Grade C", color: colors.accent },
+    D: { label: "Grade D", color: colors.muted },
+    F: { label: "Grade F", color: colors.background },
   }
 
   return (
     <div className="h-screen flex flex-col p-4 overflow-hidden">
-      {/* Top Section - Student Table */}
-      <div className="flex-1 border rounded-xl overflow-hidden mb-4">
-        <h1 className="text-xl font-semibold px-4 pt-4 pb-2">students data</h1>
-        <div className="h-full overflow-auto px-4 pb-4">
-          <TableData HeadData={headerData} rowData={userData} />
+      {/* Student Table Section - 55% of viewport */}
+      <div className="h-[55vh] border rounded-xl overflow-hidden mb-4">
+        <h1 className="text-xl font-semibold px-4 pt-4 pb-2">Students Data</h1>
+        <div className="h-[calc(55vh-3.5rem)] overflow-auto px-4 pb-4">
+          {loading ? (
+            <div className="flex items-center justify-center h-full">
+              Loading students...
+            </div>
+          ) : (
+            <TableData 
+              HeadData={headerData} 
+              rowData={userData} 
+              onStudentsUpdate={fetchUserData}
+              onEdit={handleUpdateStudent}
+              onDelete={handleDeleteStudent}
+            />
+          )}
         </div>
       </div>
 
-      {/* Charts Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Students per Course */}
-        <Card>
+      {/* Charts Section - 45% of viewport */}
+      <div className="h-[45vh] grid grid-cols-1 md:grid-cols-2 gap-6 min-h-0">
+        {/* Course Distribution Card */}
+        <Card className="h-full">
           <CardHeader className="items-center pb-0">
             <CardTitle>Students Per Course</CardTitle>
-            <CardDescription>January - June 2024</CardDescription>
+
           </CardHeader>
-          <CardContent className="pb-0">
-            <ChartContainer config={courseChartConfig} className="mx-auto aspect-square max-h-[300px]">
+          <CardContent className="h-[calc(45vh-6rem)]">
+            <ChartContainer config={courseChartConfig} className="py-3">
               <PieChart>
                 <Pie
                   data={courseData}
                   dataKey="students"
                   nameKey="course"
-                  outerRadius={100}
+                  outerRadius={80}
                   label
                 >
                   {courseData.map((entry, index) => (
-                    <Cell key={`course-${index}`} fill={entry.fill} />
+                    <Cell
+                      key={`course-${index}`}
+                      fill={courseChartConfig[entry.course]?.color || "#ccc"}
+                    />
                   ))}
                 </Pie>
                 <ChartLegend
@@ -116,21 +190,21 @@ const StudentListPage = () => {
           </CardContent>
         </Card>
 
-        {/* Grade Distribution */}
-        <Card>
+        {/* Grade Distribution Card */}
+        <Card className="h-full">
           <CardHeader className="items-center pb-0">
             <CardTitle>Grade Distribution</CardTitle>
             <CardDescription>Current Semester</CardDescription>
           </CardHeader>
-          <CardContent className="pb-0">
-            <ChartContainer config={gradeChartConfig} className="mx-auto aspect-square max-h-[250px]">
-              <PieChart>
+          <CardContent className="h-[calc(45vh-6rem)]">
+            <ChartContainer config={gradeChartConfig} className="py-2 ">
+              <PieChart width={300} height={200}>
                 <ChartTooltip content={<ChartTooltipContent nameKey="count" hideLabel />} />
                 <Pie
                   data={gradeData}
                   dataKey="count"
                   nameKey="grade"
-                  outerRadius={90}
+                  outerRadius={80}
                   label
                 >
                   <LabelList
@@ -153,9 +227,6 @@ const StudentListPage = () => {
           <CardFooter className="flex-col gap-2 text-sm">
             <div className="flex items-center gap-2 font-medium">
               Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="text-muted-foreground">
-              Showing student grade distribution
             </div>
           </CardFooter>
         </Card>

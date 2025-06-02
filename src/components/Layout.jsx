@@ -8,8 +8,9 @@ export default function Layout() {
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
-    document.body.classList.toggle('dark', dark);
+    document.documentElement.classList.toggle('dark', dark); 
   }, [dark]);
+
 
   return (
     <div className="flex bg-background dark:bg-background min-h-screen">
