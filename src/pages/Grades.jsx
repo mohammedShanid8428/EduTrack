@@ -58,12 +58,12 @@ const Grades = () => {
   return (
     <div className="p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
       {/* Row 1: GPA Summary and Grades Table */}
-      <div className="lg:col-span-4 bg-white rounded-xl p-6 shadow-sm">
-        <div className="text-gray-600 text-sm mb-1">Stay on top of</div>
+      <div className="lg:col-span-4 bg-white dark:bg-background rounded-xl p-6 shadow-sm border dark:border-accent">
+        <div className="text-gray-600 dark:text-gray-200 text-sm mb-1">Stay on top of</div>
         <h2 className="text-lg font-semibold">your child's progress</h2>
         
         <select 
-          className="mt-4 w-full text-sm border px-3 py-2 rounded-lg"
+          className="mt-4 w-full text-sm border px-3 py-2 rounded-lg dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
           onChange={(e) => handleStudentChange(e.target.value)}
           value={selectedStudent?.studentId || ""}
         >
@@ -83,16 +83,16 @@ const Grades = () => {
           </div>
 
           <div className="grid grid-cols-3 gap-2 text-sm">
-            <div className="bg-gray-50 p-2 rounded">
-              <div className="text-gray-500">Semester</div>
+            <div className="bg-gray-50 dark:bg-background border dark:border-accent p-2 rounded">
+              <div className="text-gray-500 dark:text-gray-200">Semester</div>
               <div className="font-medium">4th</div>
             </div>
-            <div className="bg-gray-50 p-2 rounded">
-              <div className="text-gray-500">Credits</div>
+            <div className="bg-gray-50 dark:bg-background border dark:border-accent p-2 rounded">
+              <div className="text-gray-500 dark:text-gray-200">Credits</div>
               <div className="font-medium">18/24</div>
             </div>
-            <div className="bg-gray-50 p-2 rounded">
-              <div className="text-gray-500">Rank</div>
+            <div className="bg-gray-50 dark:bg-background border dark:border-accent p-2 rounded">
+              <div className="text-gray-500 dark:text-gray-200">Rank</div>
               <div className="font-medium">Top 10%</div>
             </div>
           </div>
@@ -103,7 +103,7 @@ const Grades = () => {
         </div>
       </div>
 
-      <div className="lg:col-span-8 bg-white rounded-xl p-6 shadow-sm">
+      <div className="lg:col-span-8 bg-white dark:bg-background border rounded-xl p-6 shadow-sm">
         <h3 className="text-lg font-semibold mb-4">
           Grades {selectedStudent?.course && `- ${selectedStudent.course}`}
         </h3>
@@ -117,24 +117,24 @@ const Grades = () => {
       </div>
 
       {/* Row 2: Smaller cards */}
-      <div className="lg:col-span-3 bg-white rounded-xl p-6 shadow-sm">
+      <div className="lg:col-span-3 bg-white dark:bg-background border dark:border-accent rounded-xl p-6 shadow-sm">
         <h3 className="text-sm font-medium mb-4">Upcoming Tests</h3>
         <ul className="space-y-3">
           {upcomingTests.map((test, idx) => (
             <li key={idx} className="flex items-start justify-between">
-              <span className="text-sm font-semibold text-gray-800">{test.date}</span>
+              <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{test.date}</span>
               <div className="text-sm text-right">
                 <div>{test.subject}</div>
-                <div className="text-xs text-gray-500">by {test.teacher}</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">by {test.teacher}</div>
               </div>
             </li>
           ))}
         </ul>
       </div>
 
-      <div className="lg:col-span-3 bg-white rounded-xl p-6 shadow-sm text-center">
+      <div className="lg:col-span-3 bg-white dark:bg-background border dark:border-accent rounded-xl p-6 shadow-sm text-center">
         <h3 className="text-sm font-medium mb-2">Attendance</h3>
-        <div className="relative w-32 h-32 mx-auto mb-4">
+        <div className="relative w-32 h-32 mx-auto mb-4 border rounded-full overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-3xl font-bold">87%</div>
           </div>
@@ -155,7 +155,7 @@ const Grades = () => {
           </svg>
         </div>
         <div className="text-sm">Present: 184 days</div>
-        <div className="text-sm text-gray-500">Absent: 23 days</div>
+        <div className="text-sm text-gray-500 dark:text-gray-200">Absent: 23 days</div>
       </div>
 
       <div className="lg:col-span-3 bg-gradient-to-tr from-gray-800 to-gray-600 text-white rounded-xl p-6 shadow-sm flex flex-col justify-between">
@@ -168,7 +168,7 @@ const Grades = () => {
         </button>
       </div>
 
-      <div className="lg:col-span-3 bg-white rounded-xl p-6 shadow-sm">
+      <div className="lg:col-span-3 bg-white dark:bg-background border dark:border-accent rounded-xl p-6 shadow-sm">
         <div className="flex justify-between items-center mb-4">
           <div>
             <h3 className="text-sm font-semibold">Chats This Week</h3>
