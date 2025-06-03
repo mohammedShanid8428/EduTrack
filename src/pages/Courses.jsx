@@ -117,8 +117,8 @@ const CoursesPage = () => {
   return (
     <div className="h-screen flex flex-col p-4 overflow-hidden bg-background dark:bg-background">
       {/* Courses Table - 45vh */}
-      <div className="h-[45vh] bg-gray-200 dark:bg-background rounded-xl shadow-sm mb-4 overflow-hidden">
-        <div className="p-4 border-b border-gray-300 dark:border-accent bg-white dark:bg-background">
+      <div className="h-[45vh] bg-gray-150 dark:bg-background rounded-xl shadow-sm mb-4 overflow-hidden">
+        <div className="p-4 border-b border-gray-300 dark:border-accent bg-gray-100 dark:bg-background">
           <h1 className="text-lg font-semibold text-foreground dark:text-foreground">Courses Table</h1>
         </div>
         <div className="h-[calc(45vh-3.5rem)] overflow-auto">
@@ -128,35 +128,35 @@ const CoursesPage = () => {
             </div>
           ) : (
             <table className="min-w-full divide-y divide-gray-200 border border-gray-300 dark:border-accent">
-              <thead className="bg-gray-50 dark:bg-background text-foreground dark:text-foreground ">
+              <thead className="bg-gray-150 dark:bg-background text-foreground dark:text-foreground ">
                 <tr>
                   {tableHeaders.map((header, index) => (
                     <th
                       key={index}
                       scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-foreground uppercase tracking-wider sticky top-0 bg-gray-50 dark:bg-background shadow-sm"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-800 dark:text-foreground uppercase tracking-wider sticky top-0 bg-gray-50 dark:bg-background shadow-sm"
                     >
                       {header}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-background divide-y divide-gray-200">
+              <tbody className="bg-gray-100  dark:bg-background divide-y divide-gray-200">
                 {courses.map((course) => (
                   <tr key={course.id} className="hover:bg-gray-50 dark:hover:bg-background transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
                       {course.id}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-100">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-100">
                       {course.name}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-100">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-100">
                       {course.duration}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-100">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-100">
                       {course.instructor}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-100 max-w-xs truncate">
+                    <td className="px-6 py-4 text-sm text-gray-800 dark:text-gray-100 max-w-xs truncate">
                       {course.description}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-100">

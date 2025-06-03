@@ -1,7 +1,6 @@
 import StatCard from '../components/StatCard';
 import BarChartWidget from '../components/BarCharWidget';
 import TimeTableWidget from '../components/TimeTableWidget';
-import StarStudents from '../components/StarStudents';
 import { Users, BookOpen, BarChart2, CalendarPlus } from 'lucide-react';
 
 
@@ -21,12 +20,6 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
           <BarChartWidget />
           <TimeTableWidget />
-        </div>
-
-        {/* Star Students section */}
-        <div className="bg-foreground dark:bg-gray-400 rounded-xl shadow p-1 mt-4">
-          {/* <h3 className="font-semibold text-lg mb-2">Star students</h3> */}
-          <StarStudents />
         </div>
       </div>
     </div>
