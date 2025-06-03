@@ -159,13 +159,13 @@ const StudentListPage = () => {
       {/* Charts Section - 45% of viewport */}
       <div className="h-[45vh] grid grid-cols-1 md:grid-cols-2 gap-6 min-h-0">
         {/* Course Distribution Card */}
-        <Card className="h-full">
+        <Card className="h-full bg-background text-foreground dark:bg-background dark:text-background-foreground">
           <CardHeader className="items-center pb-0">
             <CardTitle>Students Per Course</CardTitle>
 
           </CardHeader>
-          <CardContent className="h-[calc(45vh-6rem)]">
-            <ChartContainer config={courseChartConfig} className="py-3">
+          <CardContent className="h-[calc(45vh-2rem)]">
+            <ChartContainer config={courseChartConfig} className="py-2">
               <PieChart>
                 <Pie
                   data={courseData}
@@ -191,14 +191,14 @@ const StudentListPage = () => {
         </Card>
 
         {/* Grade Distribution Card */}
-        <Card className="h-full">
+        <Card className="h-[45vh] bg-background text-foreground dark:bg-background dark:text-background-foreground">
           <CardHeader className="items-center pb-0">
             <CardTitle>Grade Distribution</CardTitle>
             <CardDescription>Current Semester</CardDescription>
           </CardHeader>
-          <CardContent className="h-[calc(45vh-6rem)]">
+          <CardContent className="h-[calc(45vh-2rem)]">
             <ChartContainer config={gradeChartConfig} className="py-2 ">
-              <PieChart width={300} height={200}>
+              <PieChart>
                 <ChartTooltip content={<ChartTooltipContent nameKey="count" hideLabel />} />
                 <Pie
                   data={gradeData}
@@ -224,8 +224,8 @@ const StudentListPage = () => {
               </PieChart>
             </ChartContainer>
           </CardContent>
-          <CardFooter className="flex-col gap-2 text-sm">
-            <div className="flex items-center gap-2 font-medium">
+          <CardFooter className="flex-col text-sm">
+            <div className="flex items-center font-medium">
               Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
             </div>
           </CardFooter>
