@@ -135,7 +135,7 @@ const StudentListPage = () => {
   }
 
   return (
-    <div className="h-screen flex flex-col p-4 overflow-hidden">
+    <div className="h-screen flex flex-col p-4 overflow-y-auto">
       {/* Student Table Section - 55% of viewport */}
       <div className="h-[55vh] border dark:border-accent rounded-xl overflow-hidden mb-4">
         <h1 className="text-xl font-semibold px-4 pt-4 pb-2 border-b dark:border-b-accent">Students Data</h1>

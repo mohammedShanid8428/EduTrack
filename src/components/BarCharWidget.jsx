@@ -47,7 +47,7 @@ const chartConfig = {
 
 export default function BarChartWidget() {
   return (
-    <Card className="bg-background dark:bg-background text-card-foreground shadow-lg">
+    <Card className="bg-background dark:bg-background text-card-foreground shadow-lg border dark:border-accent">
       <CardHeader>
         <CardTitle>Student Attendance</CardTitle>
         <CardDescription>Weekly attendance report</CardDescription>

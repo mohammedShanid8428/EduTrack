@@ -15,7 +15,7 @@ export default function Layout() {
   return (
     <div className="flex bg-background dark:bg-background min-h-screen">
       <Sidebar />
-      <div className="flex-1 p-4">
+      <div className="flex-1 p-4 pt-0">
         <Header dark={dark} setDark={setDark} />
         <Outlet /> {/* This renders the page content (Dashboard, Students, etc.) */}
       </div>

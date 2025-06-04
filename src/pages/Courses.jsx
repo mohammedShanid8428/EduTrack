@@ -120,10 +120,10 @@ const CoursesPage = () => {
         <h2 className="text-foreground dark:text-foreground font-semibold text-lg px-4 py-2 border-b border-accent">Courses Table</h2>
         <div className="h-[calc(45vh-3rem)] overflow-y-auto">
           {loading ? (
-            <div className="flex items-center justify-center h-full text-white">Loading courses...</div>
+            <div className="h-[300px] overflow-y-auto relative">Loading courses...</div>
           ) : (
             <table className="min-w-full text-sm text-left text-foreground dark:text-foreground">
-              <thead className="text-xs uppercase bg-background dark:bg-background text-black dark:text-foreground sticky top-0 z-10">
+              <thead className="text-xs uppercase bg-background dark:bg-background text-black dark:text-foreground ">
                 <tr>
                   <th scope="col" className="px-6 py-3">ID</th>
                   <th scope="col" className="px-6 py-3">Name</th>

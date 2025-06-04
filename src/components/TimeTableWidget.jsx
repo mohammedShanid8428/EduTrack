@@ -59,10 +59,10 @@ export default function TimeTableWidget() {
 
   return (
     <div className="bg-background dark:bg-background rounded-2xl p-3 shadow-sm overflow-x-auto border border-accent ">
-      <h3 className="text-xl font-semibold mb-4 text-foreground dark:text-foreground">
+      <h3 className="text-xl font-semibold mb-6 mt-4 text-foreground dark:text-foreground ">
         Weekly Timetable
       </h3>
-      <table className="table-fixed w-full border-collapse">
+      <table className="table-fixed w-full border-collapse my-auto">
         <thead>
           <tr>
             <th className="p-1 text-left text-foreground dark:text-foreground w-24 ">Time</th>

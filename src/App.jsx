@@ -18,7 +18,6 @@ export default function App() {
         <Route path="grades" element={<Grades />} />
         <Route path="assignments" element={<AssignmentBoard />} />
         <Route path="settings" element={<Settings />} />
-        {/* <Route path="assignments" element={<Assignments />} /> */}
       </Route>
     </Routes>
   );
