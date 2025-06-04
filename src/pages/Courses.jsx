@@ -80,7 +80,7 @@ const CoursesPage = () => {
   ]
 
 
-  // Summary data with icons
+  // Summary data 
   const courseSummary = [
     {
       title: "Total Courses",
@@ -116,66 +116,53 @@ const CoursesPage = () => {
 
   return (
     <div className="h-screen flex flex-col p-4 overflow-hidden bg-background dark:bg-background">
-      {/* Courses Table - 45vh */}
-      <div className="h-[45vh] bg-gray-150 dark:bg-background rounded-xl shadow-sm mb-4 overflow-hidden">
-        <div className="p-4 border-b border-gray-300 dark:border-accent bg-gray-100 dark:bg-background">
-          <h1 className="text-lg font-semibold text-foreground dark:text-foreground">Courses Table</h1>
-        </div>
-        <div className="h-[calc(45vh-3.5rem)] overflow-auto">
+      <div className="h-[45vh] rounded-xl border  dark:border-accent bg-background p-2 overflow-hidden mb-5">
+        <h2 className="text-foreground dark:text-foreground font-semibold text-lg px-4 py-2 border-b border-accent">Courses Table</h2>
+        <div className="h-[calc(45vh-3rem)] overflow-y-auto">
           {loading ? (
-            <div className="flex items-center justify-center h-full">
-              Loading courses...
-            </div>
+            <div className="flex items-center justify-center h-full text-white">Loading courses...</div>
           ) : (
-            <table className="min-w-full divide-y divide-gray-200 border border-gray-300 dark:border-accent">
-              <thead className="bg-gray-150 dark:bg-background text-foreground dark:text-foreground ">
+            <table className="min-w-full text-sm text-left text-foreground dark:text-foreground">
+              <thead className="text-xs uppercase bg-background dark:bg-background text-black dark:text-foreground sticky top-0 z-10">
                 <tr>
-                  {tableHeaders.map((header, index) => (
-                    <th
-                      key={index}
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-800 dark:text-foreground uppercase tracking-wider sticky top-0 bg-gray-50 dark:bg-background shadow-sm"
-                    >
-                      {header}
-                    </th>
-                  ))}
+                  <th scope="col" className="px-6 py-3">ID</th>
+                  <th scope="col" className="px-6 py-3">Name</th>
+                  <th scope="col" className="px-6 py-3">Duration</th>
+                  <th scope="col" className="px-6 py-3">Instructor</th>
+                  <th scope="col" className="px-6 py-3">Description</th>
+                  <th scope="col" className="px-6 py-3">Status</th>
                 </tr>
               </thead>
-              <tbody className="bg-gray-100  dark:bg-background divide-y divide-gray-200">
-                {courses.map((course) => (
-                  <tr key={course.id} className="hover:bg-gray-50 dark:hover:bg-background transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                      {course.id}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-100">
-                      {course.name}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-100">
-                      {course.duration}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-100">
-                      {course.instructor}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-800 dark:text-gray-100 max-w-xs truncate">
-                      {course.description}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-100">
-                      <Badge variant={Math.random() > 0.5 ? 'secondary' : 'destructive'}>
-                        {Math.random() > 0.5 ? 'Active' : 'Inactive'}
-                      </Badge>
-                    </td>
-                  </tr>
-                ))}
+              <tbody className="divide-y divide-gray-800 bg-background dark:bg-background text-foreground dark:text-foreground">
+                {courses.map((course) => {
+                  const isActive = Math.random() > 0.5;
+                  return (
+                    <tr key={course.id} className="hover:bg-gray-100 dark:hover:bg-[#1e1e1e] transition">
+                      <td className="px-6 py-4 text-foreground dark:text-foreground font-medium">{course.id}</td>
+                      <td className="px-6 py-4 text-foreground dark:text-foreground">{course.name}</td>
+                      <td className="px-6 py-4 text-foreground dark:text-foreground">{course.duration}</td>
+                      <td className="px-6 py-4 text-foreground dark:text-foreground">{course.instructor}</td>
+                      <td className="px-6 py-4 text-foreground dark:text-foreground truncate max-w-xs">{course.description}</td>
+                      <td className="px-6 py-4">
+                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${isActive ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`}>
+                          {isActive ? 'Active' : 'Inactive'}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           )}
         </div>
       </div>
 
-      {/* Bottom Section - 55vh */}
-      <div className="h-[55vh] grid grid-cols-1 lg:grid-cols-3 gap-6 min-h-0">
-        {/* Popular Courses - Left Column */}
-        <Card className="h-full bg-background text-foreground dark:bg-background dark:text-background-foreground">
+
+
+
+      <div className="h-[55vh] grid grid-cols-1 lg:grid-cols-3 gap-6 min-h-0 mb-3">
+
+        <Card className="h-full bg-background text-foreground dark:bg-background dark:text-background-foreground border  dark:border-accent">
           <CardHeader>
             <div className="flex justify-between items-center">
               <CardTitle>Popular Courses</CardTitle>
@@ -205,7 +192,7 @@ const CoursesPage = () => {
         </Card>
 
         {/* Summary Cards - Middle Column */}
-        <Card className="h-full bg-background text-foreground dark:bg-background dark:text-background-foreground">
+        <Card className="h-full bg-background text-foreground dark:bg-background dark:text-background-foreground border dark:border-accent">
           <CardHeader>
             <CardTitle>Course Summary</CardTitle>
           </CardHeader>
@@ -229,7 +216,7 @@ const CoursesPage = () => {
         </Card>
 
         {/* Pie Chart - Right Column */}
-        <Card className="h-full bg-background text-foreground dark:bg-background dark:text-background-foreground">
+        <Card className="h-full bg-background text-foreground dark:bg-background dark:text-background-foreground border  dark:border-accent">
           <CardHeader>
             <div className="flex justify-between items-center">
               <CardTitle>Course Topics</CardTitle>

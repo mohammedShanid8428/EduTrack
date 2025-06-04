@@ -137,8 +137,8 @@ const StudentListPage = () => {
   return (
     <div className="h-screen flex flex-col p-4 overflow-hidden">
       {/* Student Table Section - 55% of viewport */}
-      <div className="h-[55vh] border rounded-xl overflow-hidden mb-4">
-        <h1 className="text-xl font-semibold px-4 pt-4 pb-2">Students Data</h1>
+      <div className="h-[55vh] border dark:border-accent rounded-xl overflow-hidden mb-4">
+        <h1 className="text-xl font-semibold px-4 pt-4 pb-2 border-b dark:border-b-accent">Students Data</h1>
         <div className="h-[calc(55vh-3.5rem)] overflow-auto px-4 pb-4">
           {loading ? (
             <div className="flex items-center justify-center h-full">
@@ -157,9 +157,9 @@ const StudentListPage = () => {
       </div>
 
       {/* Charts Section - 45% of viewport */}
-      <div className="h-[45vh] grid grid-cols-1 md:grid-cols-2 gap-6 min-h-0">
+      <div className="h-[45vh] grid grid-cols-1 md:grid-cols-2 gap-6 min-h-0 mb-5">
         {/* Course Distribution Card */}
-        <Card className="h-full bg-background text-foreground dark:bg-background dark:text-background-foreground">
+        <Card className="h-full bg-background text-foreground dark:bg-background dark:text-background-foreground border border dark:border-accent">
           <CardHeader className="items-center pb-0">
             <CardTitle>Students Per Course</CardTitle>
 
@@ -191,7 +191,7 @@ const StudentListPage = () => {
         </Card>
 
         {/* Grade Distribution Card */}
-        <Card className="h-[45vh] bg-background text-foreground dark:bg-background dark:text-background-foreground">
+        <Card className="h-[45vh] bg-background text-foreground dark:bg-background dark:text-background-foreground border border dark:border-accent">
           <CardHeader className="items-center pb-0">
             <CardTitle>Grade Distribution</CardTitle>
             <CardDescription>Current Semester</CardDescription>

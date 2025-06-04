@@ -58,12 +58,12 @@ const Grades = () => {
   return (
     <div className="p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
       {/* Row 1: GPA Summary and Grades Table */}
-      <div className="lg:col-span-4 bg-white dark:bg-background rounded-xl p-6 shadow-sm border dark:border-accent">
-        <div className="text-gray-600 dark:text-gray-200 text-sm mb-1">Stay on top of</div>
+      <div className="lg:col-span-4 bg-background dark:bg-background rounded-xl p-6 shadow-sm border dark:border-accent">
+        <div className="text-gray-600 dark:text-foreground text-sm mb-1">Stay on top of</div>
         <h2 className="text-lg font-semibold">your child's progress</h2>
         
         <select 
-          className="mt-4 w-full text-sm border px-3 py-2 rounded-lg dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="mt-4 w-full text-sm border px-3 py-2 rounded-lg dark:bg-gray-800 dark:text-gray-200 focus:outline focus:ring-2 focus:ring-green-500"
           onChange={(e) => handleStudentChange(e.target.value)}
           value={selectedStudent?.studentId || ""}
         >
@@ -103,7 +103,7 @@ const Grades = () => {
         </div>
       </div>
 
-      <div className="lg:col-span-8 bg-white dark:bg-background border rounded-xl p-6 shadow-sm">
+      <div className="lg:col-span-8 bg-background dark:bg-background border dark:border-accent rounded-xl p-6 shadow-sm">
         <h3 className="text-lg font-semibold mb-4">
           Grades {selectedStudent?.course && `- ${selectedStudent.course}`}
         </h3>
@@ -117,12 +117,12 @@ const Grades = () => {
       </div>
 
       {/* Row 2: Smaller cards */}
-      <div className="lg:col-span-3 bg-white dark:bg-background border dark:border-accent rounded-xl p-6 shadow-sm">
+      <div className="lg:col-span-3 bg-background dark:bg-background border dark:border-accent rounded-xl p-6 shadow-sm">
         <h3 className="text-sm font-medium mb-4">Upcoming Tests</h3>
         <ul className="space-y-3">
           {upcomingTests.map((test, idx) => (
             <li key={idx} className="flex items-start justify-between">
-              <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{test.date}</span>
+              <span className="text-sm font-semibold text-foreground dark:text-foreground">{test.date}</span>
               <div className="text-sm text-right">
                 <div>{test.subject}</div>
                 <div className="text-xs text-gray-500 dark:text-gray-400">by {test.teacher}</div>
@@ -132,7 +132,7 @@ const Grades = () => {
         </ul>
       </div>
 
-      <div className="lg:col-span-3 bg-white dark:bg-background border dark:border-accent rounded-xl p-6 shadow-sm text-center">
+      <div className="lg:col-span-3 bg-background dark:bg-background border dark:border-accent rounded-xl p-6 shadow-sm text-center">
         <h3 className="text-sm font-medium mb-2">Attendance</h3>
         <div className="relative w-32 h-32 mx-auto mb-4 border rounded-full overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
@@ -168,7 +168,7 @@ const Grades = () => {
         </button>
       </div>
 
-      <div className="lg:col-span-3 bg-white dark:bg-background border dark:border-accent rounded-xl p-6 shadow-sm">
+      <div className="lg:col-span-3 bg-background dark:bg-background border dark:border-accent rounded-xl p-6 shadow-sm">
         <div className="flex justify-between items-center mb-4">
           <div>
             <h3 className="text-sm font-semibold">Chats This Week</h3>
