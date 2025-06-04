@@ -5,7 +5,7 @@ import NotificationCard from './Notification';
 
 export default function Header({ dark, setDark }) {
   return (
-    <header className="flex items-center justify-between p-4 border-b bg-background dark:bg-background dark:border-gray-600">
+    <header className="flex items-center justify-between p-3 border-b bg-background dark:bg-background dark:border-gray-600">
       <h2 className="text-xl font-semibold dark:text-white">Dashboard</h2>
 
       <div className="flex items-center gap-4">

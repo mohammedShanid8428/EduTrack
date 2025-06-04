@@ -6,6 +6,7 @@ import Courses from './pages/Courses';
 import Grades from './pages/Grades';
 // import { Settings } from 'lucide-react';
 import Settings from './pages/Settings';
+import AssignmentBoard from './pages/Assignment';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="students" element={<Students />} />
         <Route path="courses" element={<Courses />} />
         <Route path="grades" element={<Grades />} />
+        <Route path="assignments" element={<AssignmentBoard />} />
         <Route path="settings" element={<Settings />} />
         {/* <Route path="assignments" element={<Assignments />} /> */}
       </Route>

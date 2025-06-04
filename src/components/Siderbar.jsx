@@ -12,7 +12,7 @@ export default function Sidebar() {
   return (
     <>
     <div className="flex flex-col h-screen   p-4 justify-between bg-background w-64  dark:bg-background dark:text-foreground">
-      <h1 className="text-2xl font-extrabold mb-10">EduTrack</h1>
+      <h1 className="text-2xl font-extrabold mb-10 text-accent">EduTrack</h1>
 
       <nav className="flex flex-col gap-2">
         {navItems.map(({ label, icon: Icon, path }) => (
