@@ -87,6 +87,9 @@ const StudentListPage = () => {
     { course: "CIV", value1: 140, value2: 120 },
     { course: "EEE", value1: 160, value2: 80 },
     { course: "IT", value1: 100, value2: 140 },
+    { course: "BIO", value1: 130, value2: 110 },
+    { course: "CHEM", value1: 90, value2: 150 },
+    
   ];
 
   const chartConfig = {
@@ -158,24 +161,24 @@ const StudentListPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 min-h-0 mb-2">
         <Card className="bg-background dark:bg-background gap-2">
-          <CardHeader className="pb-2">
+          <CardHeader className="pb-1 pt-2">
             <CardTitle>Students per Course</CardTitle>
             <CardDescription>Tooltip with line indicator.</CardDescription>
           </CardHeader>
-          <CardContent width="100%" height={190}>
+          <CardContent className="p-0 px-2 pt-2" width="100%" height={140}>
             <ChartContainer config={chartConfig}>
               <BarChart data={chartData}>
                 <XAxis
                   dataKey="course"
                   tickLine={false}
-                  tickMargin={10}
+                  tickMargin={8}
                   axisLine={false}
                 />
                 <Bar
                   dataKey="value1"
                   stackId="a"
                   fill="hsl(var(--primary))"
-                  radius={[0, 0, 4, 4]}
+                  radius={[2, 2, 4, 4]}
                 />
                 <Bar
                   dataKey="value2"
@@ -194,7 +197,7 @@ const StudentListPage = () => {
         </Card>
 
         <Card className="bg-background dark:bg-background gap-2">
-          <CardHeader className="flex flex-col items-center pb-0">
+          <CardHeader className="flex flex-col items-center pb-1 pt-2">
             <CardTitle>Grade Distribution</CardTitle>
             <CardDescription>Current Semester</CardDescription>
           </CardHeader>
@@ -230,7 +233,7 @@ const StudentListPage = () => {
               </PieChart>
             </ResponsiveContainer>
           </CardContent>
-          <CardFooter className="flex justify-center pt-0 pb-2">
+          <CardFooter className="flex justify-center pt-1 pb-2">
             <div className="flex flex-wrap justify-center gap-4">
               {gradeData.map((grade, index) => (
                 <div
