@@ -1,0 +1,1 @@
+export const baseUrl = "https://edutrack-server-4zbm.onrender.com"; 

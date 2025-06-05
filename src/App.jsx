@@ -4,7 +4,7 @@ import Dashboard from './pages/Dashboard';
 import Students from './pages/Students';
 import Courses from './pages/Courses';
 import Grades from './pages/Grades';
-// import { Settings } from 'lucide-react';
+
 import Settings from './pages/Settings';
 import AssignmentBoard from './pages/Assignment';
 
